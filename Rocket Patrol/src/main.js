@@ -5,6 +5,9 @@ let config = {
     scene: [ Menu, Play ]
   }
 
+// reserve keyboard vars
+let keyF, keyR, keyLEFT, keyRIGHT;
+
 let game = new Phaser.Game(config);
 
 //Set UI sizes
