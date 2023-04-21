@@ -9,7 +9,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
       this.moveSpeed = 2; 
     }
 
-    udpate() {
+    update() {
 
         // left/right movement
         if (!this.isFiring) {
