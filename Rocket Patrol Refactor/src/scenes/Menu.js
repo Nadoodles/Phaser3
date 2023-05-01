@@ -14,9 +14,10 @@ class Menu extends Phaser.Scene {
       // menu text configuration
       let menuConfig = {
           fontFamily: 'Courier',
-          fontSize: '28px',
-          backgroundColor: '#F3B141',
-          color: '#843605',
+          fontSize: '30px',
+          fontWeight: "heavy",
+          //backgroundColor: '#F3B141',
+          color: '#FFFFFF',
           align: 'right',
           padding: {
               top: 5,
@@ -24,13 +25,34 @@ class Menu extends Phaser.Scene {
           },
           fixedWidth: 0
       }
+
+      let rectangleGreen = {
+        fontFamily: 'Courier',
+        fontWeight: "heavy",
+        fontSize: '30px',
+        height: '100px',
+        width: '100px',
+        //display: inline-block,
+        backgroundColor:'	#008000'
+      }
+
+      let rectangleRed = {
+        fontFamily: 'Courier',
+        fontWeight: "heavy",
+        fontSize: '30px',
+        height: '100px',
+        width: '100px',
+        //display: inline-block,
+        backgroundColor:'#ff0000'
+      }
       
       // show menu text
       this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
       this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
-      menuConfig.backgroundColor = '#00FF00';
-      menuConfig.color = '#000';
-      this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menuConfig).setOrigin(0.5);
+      //menuConfig.backgroundColor = '#00FF00';
+      menuConfig.color = '#FFFFFF';
+      this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice', rectangleGreen).setOrigin(0.9, -2.0);
+      this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, '→ for Expert', rectangleRed).setOrigin(-0.3, -2.0);
 
       // define keys
       keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);

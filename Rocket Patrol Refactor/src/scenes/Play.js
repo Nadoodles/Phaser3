@@ -10,8 +10,11 @@
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('winger4', './assets/winger4.png');
         this.load.image('clock', './assets/clock.png')
+        
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+
+        
     }
 
     create() {
@@ -36,7 +39,7 @@
         this.ship04 = new Spaceship(this, game.config.width + borderUISize*2, borderUISize*10, 'winger4', 0, 60).setOrigin(0, 0);
 
         // add Clock 
-        //this.clock05 = new Spaceship(this, game.config.width + borderUISize*2, borderUISize*10, 'clock', 0, 60).setOrigin(0, 0);
+        this.clock05 = new Spaceship(this, game.config.width + borderUISize*2, borderUISize*10, 'clock', 0, 60).setOrigin(0, 0);
 
 
         // define keys
@@ -44,6 +47,14 @@
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
+        // movement
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);  
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+
+        // movement for spaceships
+        keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);  
+        keyO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
 
         // animation config
         this.anims.create({
@@ -85,6 +96,7 @@
             this.gameOver = true;
         }, null, this);
 
+
         
         
     }
@@ -94,6 +106,8 @@
         // check key input for restart / menu
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
+            //this.time.paused(); 
+            countdown.paused; 
         }
 
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
@@ -144,11 +158,11 @@
                 top: 5,
                 bottom: 5,
             },
-            fixedWidth: 100
+            fixedWidth: 100, 
+            //time: game.now
         }
-            this.time = this.add.text(borderUISize + borderPadding * 39, borderUISize + borderPadding*2, game.settings.time, timeConfig);
+        let countdown = this.add.text(borderUISize + borderPadding * 39, borderUISize + borderPadding*2, this.time.now, timeConfig);
         
-        //this.time = this.add.text(borderUISize + borderPadding * 39, borderUISize + borderPadding*2, game.settings.gameTimer, timeConfig);
         
     }
 
@@ -183,4 +197,6 @@
         
         this.sound.play('sfx_explosion');
         }
+
+        
     }
