@@ -37,9 +37,10 @@
         this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
         this.ship04 = new Spaceship(this, game.config.width + borderUISize*2, borderUISize*10, 'winger4', 0, 60).setOrigin(0, 0);
+        this.ship04.moveSpeed += 5;
 
         // add Clock 
-        this.clock05 = new Spaceship(this, game.config.width + borderUISize*2, borderUISize*10, 'clock', 0, 60).setOrigin(0, 0);
+        this.ship05 = new Spaceship(this, game.config.width + borderUISize*2, borderUISize*5, 'clock', 0, 60).setOrigin(10, 0);
 
 
         // define keys
@@ -55,6 +56,7 @@
         // movement for spaceships
         keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);  
         keyO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
+        //leftClick = this.input.keyboard.addKey(Phaser.Input.Keybard.KeyCodes.leftClick);
 
         // animation config
         this.anims.create({
@@ -95,8 +97,6 @@
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← to Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
-
-
         
         
     }
@@ -122,13 +122,14 @@
             this.ship02.update();
             this.ship03.update();
             this.ship04.update(); 
+            this.ship05.update(); 
         }
 
         // check collisions
-        /*if (this.checkCollision(this.p1Rocket, this.clock05)) {
+        if (this.checkCollision(this.p1Rocket, this.ship05)) {
             this.p1Rocket.reset(); 
-            this.shipExplode(this.click05); 
-        }*/
+            this.shipExplode(this.ship05); 
+        }
 
         if (this.checkCollision(this.p1Rocket, this.ship04)) {
             this.p1Rocket.reset(); 
@@ -162,6 +163,8 @@
             //time: game.now
         }
         let countdown = this.add.text(borderUISize + borderPadding * 39, borderUISize + borderPadding*2, this.time.now, timeConfig);
+
+        
         
         
     }
@@ -197,6 +200,8 @@
         
         this.sound.play('sfx_explosion');
         }
+
+        
 
         
     }

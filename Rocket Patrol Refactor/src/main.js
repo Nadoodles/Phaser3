@@ -9,7 +9,8 @@ This project took me approximately 15 hours
 3) Display the time remaining (in seconds) on the screen (10)
 4) Create a new title screen (e.g., new artwork, typography, layout) (10)
 5) Allow the player to control the Rocket after it's fired (5)
-6) Allow players to control spaceship speed (10) ? I'll be happy with 10, but I understand if its 5, just created my own mod to make it easier for people
+6) Allow players to control spaceship speed (15) ? I'll be happy with 15, but I understand if its 10, just created my own mod to make it easier for people
+  - this can speed up the spaceships or stop the spaceships to hit them 
 */
 
 let config = {
@@ -20,7 +21,7 @@ let config = {
   }
 
 // reserve keyboard vars
-let keyF, keyR, keyLEFT, keyRIGHT, keyA, keyD, keyO, keyP;
+let keyF, keyR, keyLEFT, keyRIGHT, keyA, keyD, keyO, keyP, leftClick;
 
 let game = new Phaser.Game(config);
 

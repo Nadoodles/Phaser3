@@ -14,7 +14,7 @@ class Menu extends Phaser.Scene {
       // menu text configuration
       let menuConfig = {
           fontFamily: 'Courier',
-          fontSize: '30px',
+          fontSize: '20px',
           fontWeight: "heavy",
           //backgroundColor: '#F3B141',
           color: '#FFFFFF',
@@ -49,10 +49,14 @@ class Menu extends Phaser.Scene {
       // show menu text
       this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
       this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
+      this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Use A or D to move ship', menuConfig).setOrigin(0.5);
       //menuConfig.backgroundColor = '#00FF00';
       menuConfig.color = '#FFFFFF';
       this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice', rectangleGreen).setOrigin(0.9, -2.0);
       this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, '→ for Expert', rectangleRed).setOrigin(-0.3, -2.0);
+
+      this.add.text(game.config.width/2, game.config.height/2 + borderUISize * 2 + borderPadding , 'Use O to speed up spaceships or P to stop them', menuConfig).setOrigin(0.5);
+
 
       // define keys
       keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
