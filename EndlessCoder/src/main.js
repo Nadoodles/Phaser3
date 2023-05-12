@@ -1,8 +1,12 @@
 let config = {
     type: Phaser.AUTO,
-    width:  window.innerWidth-20,
+    width:  961,
     height: 640,
-    scene: [ Menu, Play ]
+    scene: [ Menu, Play ],
+    title: "Duckie Dodge", 
+    scale: {
+      autoCenter: Phaser.Scale.CENTER_BOTH
+  }
   }
 console.log(window.innerWidth-20); 
 // reserve keyboard vars

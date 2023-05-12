@@ -29,6 +29,23 @@ class Menu extends Phaser.Scene {
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
-  
+    
+    update() {
+        if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            // Novice mode
+            game.settings = {
+              //gameTimer: 60000    
+            }   
+            this.scene.start("playScene");
 
+          }
+          if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
+            // Expert mode
+            game.settings = {
+              //gameTimer: 45000    
+            }  
+            this.scene.start("playScene");
+
+          }
+    }
 }
