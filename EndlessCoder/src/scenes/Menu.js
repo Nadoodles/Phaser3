@@ -3,6 +3,8 @@ class Menu extends Phaser.Scene {
         super("menuScene");
     }
 
+    
+
     create() {
         // menu text configuration
         let menuConfig = {
@@ -28,6 +30,8 @@ class Menu extends Phaser.Scene {
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     }
     
     update() {
@@ -47,5 +51,6 @@ class Menu extends Phaser.Scene {
             this.scene.start("playScene");
 
           }
+
     }
 }

@@ -7,6 +7,8 @@ class Play extends Phaser.Scene {
         // load images/tile sprites
         this.load.image('river', './assets/river2.png');
         this.load.image('duck', './assets/duck.png');
+        this.load.image('trunk', './assets/treeTrunk.png')
+        this.load.audio('duckSound', './assets/duck-quack5.wav');
     }
 
     create() {
@@ -26,13 +28,16 @@ class Play extends Phaser.Scene {
   
        
         // define keys
-        keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
         // add duck (d)
-        this.d1Duck = new Duck(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'duck').setOrigin(100, 100); 
+        this.d1Duck = new Duck(this, x, y, 'duck').setOrigin(0, 0); 
+
+        // add tree trunk
+        this.tTrunk = new Trunk(this, x, y, 'trunk').setOrigin(0.0);
     
         // GAME OVER flag
         this.gameOver = false;
@@ -48,9 +53,32 @@ class Play extends Phaser.Scene {
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             this.scene.start("menuScene");
         }
+        
+        
+
+        // check collisions
+        /*if(this.checkCollision(this.d1Duck, this.t1Trunk)) {
+            this.p1Rocket.reset();
+            this.shipExplode(this.ship03);
+        }*/
 
         if(!this.gameOver) {
-            this.d1Duck.update(); 
+            this.d1Duck.update();
+            this.tTrunk.update(); 
         }
     }
+
+    /*checkCollision(duck, trunk) {
+        console.log(duck);
+        console.log(trunk);
+        // simple AABB checking
+        if (duck.x < trunk.x + trunk.width && 
+            duck.x + duck.width > trunk.x && 
+            duck.y < trunk.y + trunk.height &&
+            duck.height + duck.y > trunk. y) {
+                return true;
+        } else {
+            return false;
+        }
+    }*/
 }
