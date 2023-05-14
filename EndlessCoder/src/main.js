@@ -1,3 +1,11 @@
+/*
+Name: Jose Nadales
+Game Name: Duck Escape
+Hours: 22 Hours
+Creative Tilt: I don't believe I added much creativity. I started on the assignment late, so I wasn't able to add much creativity. This is 
+similar to the rocket game with some adjustments. I will do better in the next assignment. 
+*/
+
 let config = {
     type: Phaser.AUTO,
     width:  961,
@@ -17,7 +25,6 @@ let config = {
 
 
 }
-console.log(window.innerWidth-20); 
 // reserve keyboard vars
 let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyR, keyS, keyC;
 
