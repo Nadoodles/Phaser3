@@ -3,7 +3,7 @@ class Boulder extends Phaser.GameObjects.Sprite {
       super(scene, x, y, texture, frame);
       scene.add.existing(this);
       this.moveSpeed = 3;
-      this.timer = 0;
+      this.timer = 1000;
     }
   
     update() {

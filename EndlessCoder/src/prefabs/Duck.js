@@ -1,8 +1,8 @@
 class Duck extends Phaser.GameObjects.Sprite { 
-    constructor(scene, x, y, texture, frame, pointValue) {
+    constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame); 
         scene.add.existing(this); 
-        this.points = pointValue; 
+        this.score = 0; 
         this.moveSpeed = 5;
         this.duckSound = scene.sound.add('duckSound'); // duck quack 
         this.soundTimer = scene.time.addEvent({
@@ -12,7 +12,7 @@ class Duck extends Phaser.GameObjects.Sprite {
               this.duckSound.play();
             },
           });
-        this.totalLives = 5; 
+        this.totalLives = 18; 
 
     }
 

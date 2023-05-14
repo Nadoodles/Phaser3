@@ -9,7 +9,9 @@ class Play extends Phaser.Scene {
         this.load.image('duck', './assets/duck.png');
         this.load.image('trunk', './assets/treeTrunk.png');
         this.load.image('boulder', './assets/boulder.png');
+        this.load.image('eagle', './assets/eagle.png');
         this.load.audio('duckSound', './assets/duck-quack5.wav');
+        this.load.image('heart', './assets/heart.png'); 
     }
 
     create() {
@@ -52,10 +54,25 @@ class Play extends Phaser.Scene {
 
         // add boulder 
         this.Boulder = new Boulder(this, x, y, 'boulder').setOrigin(0.0); 
+
+        // add eagle 
+        this.Eagle = new Eagle(this, x, y, 'eagle').setOrigin(0.0);
     
         // GAME OVER flag
         this.gameOver = false;
-  
+
+        // add score variable
+        this.score = 0;
+
+        // add score text
+        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
+        // add health text
+        this.load.image('heart', './assets/heart.png');
+        this.healthText = this.add.text(16, 60, 'health: 10', { fontSize: '32px', fill: '#000' });
+        this.heartImage = this.add.image(this.healthText.x + this.healthText.width + 10, this.healthText.y + this.healthText.height/2, 'heart').setScale(.8);
+                
+        
     }
 
     update() {
@@ -74,15 +91,21 @@ class Play extends Phaser.Scene {
             this.trunkSpawned = true;
         }
 
-        // spawn boulder trunk
+        // spawn boulder 
         if (!this.BoulderSpawned && this.Boulder.x > this.game.config.width) {
             this.Boulder = new Boulder(this, this.game.config.width, Phaser.Math.Between(0, this.game.config.height), 'boulder').setOrigin(0, 0);
             this.BoulderSpawned = true;
         }
 
+        // spawn eagle
+        if (!this.EagleSpawned && this.Eagle.x > this.game.config.width) {
+            this.Eagle = new Eagle(this, this.game.config.width, Phaser.Math.Between(0, this.game.config.height), 'eagle').setOrigin(0.0);
+            this.EagleSpawned = true;
+        }
+
         if (this.d1Duck.totalLives <= 0) {
             this.gameOver = true; 
-            this.scene.start('gameOver');
+            this.scene.start("gameOver", { score: this.score });
         }
         
         
@@ -99,11 +122,26 @@ class Play extends Phaser.Scene {
             this.d1Duck.totalLives -= 2; 
         }
 
+        if (this.collisionEagle(this.d1Duck, this.Eagle)) {
+            this.Eagle.reset(); 
+            this.d1Duck.totalLives -= 5; 
+        }
+
         if(!this.gameOver) {
             this.d1Duck.update();
             this.tTrunk.update(); 
             this.Boulder.update(); 
+            this.Eagle.update(); 
         }
+
+        // update score
+        this.score += 0.1;
+
+        this.scoreText.setText('score: ' + Math.trunc(this.score));
+
+        // update health
+        this.health -= 1;
+        this.healthText.setText('health: ' + this.d1Duck.totalLives);
 
         console.log(this.d1Duck.totalLives);
     }
@@ -125,6 +163,18 @@ class Play extends Phaser.Scene {
             duck.x + duck.width > boulder.x &&
             duck.y < boulder.y + boulder.height &&
             duck.height + duck.y > boulder.y) {
+                return true; 
+            }
+            else { 
+                return false; 
+            }
+    }
+
+    collisionEagle(duck, eagle) {
+        if (duck.x < eagle.x + eagle.width &&
+            duck.x + duck.width > eagle.x &&
+            duck.y < eagle.y + eagle.height &&
+            duck.height + duck.y > eagle.y) {
                 return true; 
             }
             else { 

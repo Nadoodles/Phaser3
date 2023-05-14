@@ -2,8 +2,8 @@ class Trunk extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
       super(scene, x, y, texture, frame);
       scene.add.existing(this);
-      this.moveSpeed = 10;
-      this.timer = 0;
+      this.moveSpeed = 5;
+      this.timer = 1000;
     }
   
     update() {
