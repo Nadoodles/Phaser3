@@ -21,7 +21,7 @@ class Overworld extends Phaser.Scene {
         // add layer
         const bgLayer = map.createLayer('background', tileset, 0, 0)
         const terrainLayer = map.createLayer('terrain', tileset, 0, 0)
-        const treeLayer = map.createLayer('tree', tileset, 0, 0)
+        const treeLayer = map.createLayer('tree', tileset, 0, 0).setDepth(100)
 
         // Add player
         this.slime = this.physics.add.sprite(32, 32, 'slime', 0);
@@ -39,7 +39,7 @@ class Overworld extends Phaser.Scene {
         this.slime.body.setCollideWorldBounds(true)
 
         // enable Collisoin
-        terrainLyaer.setCollisionByProperty({collides: true})
+        terrainLayer.setCollisionByProperty({collides: true})
         treeLayer.setCollsionByProperty({collides: true})
 
         //cameras 
