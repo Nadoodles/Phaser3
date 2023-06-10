@@ -1,5 +1,8 @@
+// Movie: Grave of the Fireflies
+// Partner; Brian Camillo
+
 let config = {
-  type: Phaser.CANVAS,
+  type: Phaser.AUTO,
   render: {
       pixelArt: true
   },
