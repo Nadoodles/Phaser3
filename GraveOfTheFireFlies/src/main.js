@@ -15,7 +15,7 @@ let config = {
       }
   },
   zoom: 2, 
-  scene: [Menu, Scene1, Scene2, Scene3]
+  scene: [Menu, Scene1, Scene2, Scene3, GameOver]
 }
 
 let game = new Phaser.Game(config);
