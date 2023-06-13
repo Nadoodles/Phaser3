@@ -19,6 +19,7 @@ class Scene1 extends Phaser.Scene {
             frameWidth: 16, 
             frameHeight: 16
         });
+        this.load.image('seita', './assets/seitaSmall.png');
         this.load.image('exit', './assets/exitsign.png')
         this.load.image('tilesetImage', './assets/tileset.png');
         this.load.tilemapTiledJSON('tilemapJSON', './assets/scenetilemap.json');
@@ -52,7 +53,7 @@ class Scene1 extends Phaser.Scene {
         const treeLayer = map.createLayer('houses', tileset, 0, 0).setDepth(100)
 
         // Add player
-        this.slime = this.physics.add.sprite(0, this.game.config.height, 'slime', 0);
+        this.seita = this.physics.add.sprite(0, this.game.config.height, 'seita', 0);
         this.anims.create({
             key: 'jiggle',
             frameRate: 8, 
@@ -62,23 +63,23 @@ class Scene1 extends Phaser.Scene {
                 end: 1
             })
         })
-        this.slime.play('jiggle')
+        //this.slime.play('jiggle')
 
-        this.slime.body.setCollideWorldBounds(true)
+        this.seita.body.setCollideWorldBounds(true)
 
         // enable Collisoin
         treeLayer.setCollisionByProperty({collides: true})
 
         //cameras 
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels)
-        this.cameras.main.startFollow(this.slime, true, 0.25, 0.25)
+        this.cameras.main.startFollow(this.seita, true, 0.25, 0.25)
         this.cameras.main.setZoom(2, 2);
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels)
 
         //input
         this.cursors = this.input.keyboard.createCursorKeys()
 
-        this.physics.add.collider(this.slime, treeLayer);
+        this.physics.add.collider(this.seita, treeLayer);
         treeLayer.setCollisionBetween(1452, 1586)
         treeLayer.setCollisionBetween(0, 3)
         treeLayer.setCollisionBetween(33, 36)
@@ -89,7 +90,7 @@ class Scene1 extends Phaser.Scene {
 
         const exitSign = this.add.sprite(this.game.config.width - 140, 50, 'exit');
         this.physics.add.existing(exitSign);
-        this.physics.add.collider(this.slime, exitSign, () => {
+        this.physics.add.collider(this.seita, exitSign, () => {
             this.scene.start("scene2")
           });
 
@@ -113,9 +114,9 @@ class Scene1 extends Phaser.Scene {
         }
     
         this.direction.normalize();
-        this.slime.setVelocity(this.VEL * this.direction.x, this.VEL * this.direction.y)
+        this.seita.setVelocity(this.VEL * this.direction.x, this.VEL * this.direction.y)
 
-        this.physics.add.collider(this.slime, this.fireSprite, () => {
+        this.physics.add.collider(this.seita, this.fireSprite, () => {
             this.scene.start("gameOver");
           });
 

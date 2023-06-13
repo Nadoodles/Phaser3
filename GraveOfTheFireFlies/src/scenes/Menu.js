@@ -4,25 +4,21 @@ class Menu extends Phaser.Scene {
     }
   
     preload() {
+        // load backgorund
+        this.load.image('bgImage', './assets/bgImage.png')
+        // load font
+        this.load.bitmapFont('Font', './assets/gem.png', './assets/gem.xml');
     }
   
     create() {
-        // menu text configuration
-        let menuConfig = {
-            fontFamily: 'Courier',
-            fontSize: '20px',
-            color: '#FFFFFF',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-        
+
+        // add bgm
+        this.bgImage = this.add.tileSprite(0,0, 630, 450, 'bgImage').setOrigin(0,0);
         // show menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Grave of the FireFlies', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Type (S) to Scene1, (R) for Scene2, (C) for Scene3', menuConfig).setOrigin(0.5);
+        this.add.bitmapText(game.config.width/2, game.config.height/2.5, 'Font', 'Grave of the FireFlies', 50).setOrigin(0.5);
+        this.add.bitmapText(game.config.width/2, game.config.height/2, 'Font', 'Type (S) to Scene1, (R) for Scene2', 32).setOrigin(0.5);
+        this.add.bitmapText(game.config.width/2, game.config.height/1.75, 'Font', '(C) for Scene3', 32).setOrigin(0.5);
+
        
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);

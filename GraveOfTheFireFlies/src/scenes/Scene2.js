@@ -8,17 +8,13 @@ class Scene2 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.spritesheet('slime', './assets/slime.png', {
-            frameWidth: 16, 
-            frameHeight: 16
-        });
-        this.load.spritesheet('fire', './assets/fire.png', {
-            frameWidth: 16, 
-            frameHeight: 16
-        });
         this.load.image('food', './assets/crabmeat.png');
+        this.load.image('seita', './assets/seitaSmall.png');
         this.load.image('tilesetImage', './assets/tileset.png');
         this.load.tilemapTiledJSON('tilemapJSON', './assets/scenetilemap.json');
+        this.load.audio('pickup', './assets/pickup.mp3');
+        this.load.audio('bgmS2', './assets/bgm.mp3');
+
     }
     
     create() {
@@ -31,7 +27,7 @@ class Scene2 extends Phaser.Scene {
         const treeLayer = map.createLayer('houses', tileset, 0, 0).setDepth(100)
 
         // Add player
-        this.slime = this.physics.add.sprite(600, 150, 'slime', 0);
+        this.seita = this.physics.add.sprite(600, 150, 'seita', 0);
         this.anims.create({
             key: 'jiggle',
             frameRate: 8, 
@@ -41,9 +37,8 @@ class Scene2 extends Phaser.Scene {
                 end: 1
             })
         })
-        this.slime.play('jiggle')
 
-        this.slime.body.setCollideWorldBounds(true)
+        this.seita.body.setCollideWorldBounds(true)
 
         this.food = this.add.sprite(310, 300, 'food');
         this.food1 = this.add.sprite(100, 350, 'food');
@@ -59,28 +54,39 @@ class Scene2 extends Phaser.Scene {
 
         //cameras 
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels)
-        this.cameras.main.startFollow(this.slime, true, 0.25, 0.25)
+        this.cameras.main.startFollow(this.seita, true, 0.25, 0.25)
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels)
         this.cameras.main.setZoom(3,3);
         //input
         this.cursors = this.input.keyboard.createCursorKeys()
 
-        this.physics.add.collider(this.slime, treeLayer);
+        this.physics.add.collider(this.seita, treeLayer);
         treeLayer.setCollisionBetween(1452, 1586)
         treeLayer.setCollisionBetween(0, 3)
         treeLayer.setCollisionBetween(33, 36)
         treeLayer.setCollisionBetween(66, 69)
 
         this.points, this.points1, this.points2, this.points3 = 0;
+
+        // added sfx
+        this.pickupSound = this.sound.add('pickup', {volume: 0.3});
+
+        this.bgm = this.sound.add('bgmS2', { 
+			mute: false,
+			volume: 0.3,
+			rate: 1,
+			loop: true 
+		});
+		this.bgm.play();
     }
 
     // check collision
-    checkCollision(slime, food){
+    checkCollision(seita, food){
         // simple AABB checking
-        if(slime.x < food.x + food.width &&
-            slime.x + slime.width > food.x &&
-            slime.y < food.y + food.height &&
-            slime.height + slime.y > food.y){
+        if(seita.x < food.x + food.width &&
+            seita.x + seita.width > food.x &&
+            seita.y < food.y + food.height &&
+            seita.height + seita.y > food.y){
             return true;
         } else{
             return false;
@@ -107,44 +113,38 @@ class Scene2 extends Phaser.Scene {
         }
     
         this.direction.normalize();
-        this.slime.setVelocity(this.VEL * this.direction.x, this.VEL * this.direction.y)
-        this.physics.add.collider(this.slime, this.fireSprite, () => {
-            this.scene.start("gameOver");
-          });
+        this.seita.setVelocity(this.VEL * this.direction.x, this.VEL * this.direction.y)
 
         // check collisions
-        if(this.checkCollision(this.slime, this.food)){
+        if(this.checkCollision(this.seita, this.food)){
             this.food.destroy();
             this.points = 1;   
-            console.log(this.points)         
+            this.pickupSound.play();
         }
 
-        if(this.checkCollision(this.slime, this.food1)){
+        if(this.checkCollision(this.seita, this.food1)){
             this.food1.destroy();
-            this.points1 = 1;  
-            console.log(this.points1)         
-       
+            this.points1 = 1;        
+            this.pickupSound.play();
         }
 
-        if(this.checkCollision(this.slime, this.food2)){
+        if(this.checkCollision(this.seita, this.food2)){
             this.food2.destroy();
-            this.points2 = 1;  
-            console.log(this.points2)         
-          
+            this.points2 = 1;   
+            this.pickupSound.play();
+         
         }
 
-        if(this.checkCollision(this.slime, this.food3)){
+        if(this.checkCollision(this.seita, this.food3)){
             this.food3.destroy();
-            this.points3 = 1;    
-            console.log(this.points3)         
-        
+            this.points3 = 1;      
+            this.pickupSound.play();
         }
 
-        if(this.checkCollision(this.slime, this.food4)){
+        if(this.checkCollision(this.seita, this.food4)){
             this.food4.destroy();
-            this.points4 = 1;    
-            console.log(this.points4)         
-        
+            this.points4 = 1; 
+            this.pickupSound.play();           
         }
 
         
