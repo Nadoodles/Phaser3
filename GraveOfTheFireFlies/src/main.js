@@ -8,7 +8,7 @@ let config = {
   },
   width: 630,
   height: 450, 
-  phsyics: {
+  physics: {
       default: "arcade", 
       arcade: {
           debug: true

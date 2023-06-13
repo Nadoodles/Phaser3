@@ -1,9 +1,10 @@
-class Seita extends Phaser.GameObjects.Sprite {
+class Seita extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, frame) {
-        super(scene, x, y, texture, frame);
-        //scene.add.existing(this);
-        this.moveSpeed = 5;
-        this.setVisible(true); // Set visibility to true in the constructor
+        super(scene, x, y, texture, frame)
+        scene.add.existing(this)
+        scene.physics.add.existing(this)
+
+        this.setCollideWorldBounds(true)
     }
 
     update() {
@@ -28,7 +29,7 @@ class Seita extends Phaser.GameObjects.Sprite {
         }
 
     }
-
+ 
     reset() {
         this.x = game.config.width; 
     }
