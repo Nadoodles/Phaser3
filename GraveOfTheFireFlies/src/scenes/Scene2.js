@@ -20,24 +20,7 @@ class Scene2 extends Phaser.Scene {
         this.load.image('tilesetImage', './assets/tileset.png');
         this.load.tilemapTiledJSON('tilemapJSON', './assets/scenetilemap.json');
     }
-
-    spawnFire() {
-        // Generate random coordinates within the game world
-        const x = Phaser.Math.Between(0, this.game.config.width);
-        const y = Phaser.Math.Between(0, this.game.config.height);
     
-        // Create the fire sprite
-        this.physics.add.existing(this.fireSrprite); // Enable physics for collision detection
-    
-        // Set a timer to spawn the next fire
-        const spawnInterval = Phaser.Math.Between(2000, 5000); // Randomize the interval
-        this.fireSpawnTimer = this.time.delayedCall(spawnInterval, () => {
-          this.fireSpawned = false; // Reset the fireSpawned flag
-          this.spawnFire(); // Call the spawnFire function again
-        });
-      }
-
-
     create() {
         const map = this.add.tilemap("tilemapJSON")
         const tileset = map.addTilesetImage('tileset', 'tilesetImage')
@@ -48,7 +31,7 @@ class Scene2 extends Phaser.Scene {
         const treeLayer = map.createLayer('houses', tileset, 0, 0).setDepth(100)
 
         // Add player
-        this.slime = this.physics.add.sprite(0, this.game.config.height, 'slime', 0);
+        this.slime = this.physics.add.sprite(600, 150, 'slime', 0);
         this.anims.create({
             key: 'jiggle',
             frameRate: 8, 
@@ -62,8 +45,13 @@ class Scene2 extends Phaser.Scene {
 
         this.slime.body.setCollideWorldBounds(true)
 
-        this.food = this.add.sprite(100, 300, 'food');
+        this.food = this.add.sprite(310, 300, 'food');
         this.food1 = this.add.sprite(100, 350, 'food');
+        this.food2 = this.add.sprite(55, 100, 'food');
+        this.food3 = this.add.sprite(395, 430,'food');
+
+        this.food4 = this.add.sprite(360, 150, 'food');
+
 
 
         // enable Collisoin
@@ -73,7 +61,7 @@ class Scene2 extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels)
         this.cameras.main.startFollow(this.slime, true, 0.25, 0.25)
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels)
-        this.cameras.main.setZoom(2,2);
+        this.cameras.main.setZoom(3,3);
         //input
         this.cursors = this.input.keyboard.createCursorKeys()
 
@@ -83,8 +71,7 @@ class Scene2 extends Phaser.Scene {
         treeLayer.setCollisionBetween(33, 36)
         treeLayer.setCollisionBetween(66, 69)
 
-        this.points = 0;
-        this.points1 = 0;
+        this.points, this.points1, this.points2, this.points3 = 0;
     }
 
     // check collision
@@ -128,20 +115,42 @@ class Scene2 extends Phaser.Scene {
         // check collisions
         if(this.checkCollision(this.slime, this.food)){
             this.food.destroy();
-            this.points = 1;
-            console.log(this.points);
-            
+            this.points = 1;   
+            console.log(this.points)         
         }
 
         if(this.checkCollision(this.slime, this.food1)){
             this.food1.destroy();
-            this.points1 = 1;
-            console.log(this.points1);
-            
+            this.points1 = 1;  
+            console.log(this.points1)         
+       
         }
+
+        if(this.checkCollision(this.slime, this.food2)){
+            this.food2.destroy();
+            this.points2 = 1;  
+            console.log(this.points2)         
+          
+        }
+
+        if(this.checkCollision(this.slime, this.food3)){
+            this.food3.destroy();
+            this.points3 = 1;    
+            console.log(this.points3)         
         
-        if(this.points == 1 && this.points1 == 1){
-            this.winner = this.add.text(50, 50, "winner", 0);
+        }
+
+        if(this.checkCollision(this.slime, this.food4)){
+            this.food4.destroy();
+            this.points4 = 1;    
+            console.log(this.points4)         
+        
+        }
+
+        
+        if(this.points == 1 && this.points1 == 1 && this.points2 == 1 
+            && this.points3 == 1 && this.points4 == 1){
+                this.scene.start("scene3");
         }
 
     }
