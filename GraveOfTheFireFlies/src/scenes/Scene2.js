@@ -14,7 +14,7 @@ class Scene2 extends Phaser.Scene {
         this.load.tilemapTiledJSON('tilemapJSON', './assets/scenetilemap.json');
         this.load.audio('pickup', './assets/pickup.mp3');
         this.load.audio('bgmS2', './assets/bgm.mp3');
-
+        this.load.audio('winner', './assets/winner.wav');
     }
     
     create() {
@@ -70,7 +70,7 @@ class Scene2 extends Phaser.Scene {
 
         // added sfx
         this.pickupSound = this.sound.add('pickup', {volume: 0.3});
-
+        this.winner = this.sound.add('winner', {volume: 0.3});
         this.bgm = this.sound.add('bgmS2', { 
 			mute: false,
 			volume: 0.3,
@@ -151,6 +151,9 @@ class Scene2 extends Phaser.Scene {
         if(this.points == 1 && this.points1 == 1 && this.points2 == 1 
             && this.points3 == 1 && this.points4 == 1){
                 this.scene.start("scene3");
+                this.bgm.stop();
+                this.winner.play();
+
         }
 
     }

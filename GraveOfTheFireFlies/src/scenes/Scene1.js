@@ -23,6 +23,8 @@ class Scene1 extends Phaser.Scene {
         this.load.image('exit', './assets/exitsign.png')
         this.load.image('tilesetImage', './assets/tileset.png');
         this.load.tilemapTiledJSON('tilemapJSON', './assets/scenetilemap.json');
+        this.load.audio('bgmS1', './assets/bgms1.mp3');
+        this.load.audio('winner', './assets/winner.wav');
     }
 
     spawnFire() {
@@ -88,13 +90,26 @@ class Scene1 extends Phaser.Scene {
        
         this.spawnFire()
 
+        // added sfx
+        this.winner = this.sound.add('winner', {volume: 0.3});
+        this.bgm = this.sound.add('bgmS1', { 
+			mute: false,
+			volume: 0.3,
+			rate: 1,
+			loop: true 
+		});
+		this.bgm.play();
+       
+
         const exitSign = this.add.sprite(this.game.config.width - 140, 50, 'exit');
         this.physics.add.existing(exitSign);
         this.physics.add.collider(this.seita, exitSign, () => {
             this.scene.start("scene2")
+            this.bgm.stop();
+            this.winner.play();
           });
 
-
+   
          
     }
 
@@ -117,6 +132,7 @@ class Scene1 extends Phaser.Scene {
         this.seita.setVelocity(this.VEL * this.direction.x, this.VEL * this.direction.y)
 
         this.physics.add.collider(this.seita, this.fireSprite, () => {
+            this.bgm.stop();
             this.scene.start("gameOver");
           });
 
