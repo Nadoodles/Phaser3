@@ -35,6 +35,15 @@ class Scene3 extends Phaser.Scene {
       this.firefly5 = this.add.sprite(500, 70, 'firefly');
       this.firefly6 = this.add.sprite(200, 180, 'firefly');
 
+        // Create tweens for firefly movement
+      this.createFireflyTween(this.firefly1, 600, 400);
+      this.createFireflyTween(this.firefly2, 150, 200);
+      this.createFireflyTween(this.firefly3, 220, 420);
+      this.createFireflyTween(this.firefly4, 600, 250);
+      this.createFireflyTween(this.firefly5, 550, 100);
+      this.createFireflyTween(this.firefly6, 250, 200);
+
+
       // Add player
       this.seita = this.physics.add.sprite(315, 225, 'seita', 0);
 
@@ -93,6 +102,17 @@ class Scene3 extends Phaser.Scene {
    }
 
 
+   createFireflyTween(firefly, targetX, targetY) {
+      const duration = Phaser.Math.Between(2000, 4000); // Randomize the duration
+      this.tweens.add({
+         targets: firefly,
+         x: targetX,
+         y: targetY,
+         duration: duration,
+         yoyo: true,
+         repeat: -1
+      });
+   }
 
    // check collision
    checkCollision(seita, firefly){
@@ -149,6 +169,7 @@ class Scene3 extends Phaser.Scene {
          this.firefly2.destroy();
          this.points1 = 1;  
          this.pickupSound.play();
+
       }
 
       if(this.checkCollision(this.seita, this.firefly3)){
@@ -168,13 +189,13 @@ class Scene3 extends Phaser.Scene {
       if(this.checkCollision(this.seita, this.firefly5)){
          this.firefly5.destroy();
          this.points4 = 1;    
-         this.pickupSound.play();
+         console.log(this.points4)         
       }
 
       if(this.checkCollision(this.seita, this.firefly6)){
          this.firefly6.destroy();
          this.points5 = 1;    
-         this.pickupSound.play();
+         console.log(this.points5)         
       }
 
       if(this.points == 1 && this.points1 == 1 && this.points2 == 1 
