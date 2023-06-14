@@ -18,10 +18,18 @@ class Scene3 extends Phaser.Scene {
    create() {
       const map = this.add.tilemap("tilemapJSON")
       const tileset = map.addTilesetImage('tileset', 'tilesetImage')
+ 
 
       // add layer
       const bgLayer = map.createLayer('background', tileset, 0, 0)
-
+      
+      // add fireflies
+      
+      this.firefly1 = this.add.sprite(310, 300, 'firefly');
+      this.firefly2 = this.add.sprite(100, 350, 'firefly');
+      this.firefly3 = this.add.sprite(55, 100, 'firefly');
+      this.firefly4 = this.add.sprite(395, 430, 'firefly');
+      this.firefly5 = this.add.sprite(360, 150, 'firefly');
       // Add player
       this.seita = this.physics.add.sprite(315, 225, 'seita', 0);
 
@@ -49,6 +57,7 @@ class Scene3 extends Phaser.Scene {
          key: 'vision',
          add: false
       })
+      vision.scale = 9.5
    
       rt.mask = new Phaser.Display.Masks.BitmapMask(this, vision)
       rt.mask.invertAlpha = true
@@ -56,12 +65,7 @@ class Scene3 extends Phaser.Scene {
 
       const firefliesGroup = this.add.group({ depth: bgLayer.depth - 1 })
 
-      this.firefly1 = this.add.sprite(310, 300, 'firefly');
-      this.firefly2 = this.add.sprite(100, 350, 'firefly');
-      this.firefly3 = this.add.sprite(55, 100, 'firefly');
-      this.firefly4 = this.add.sprite(395, 430, 'firefly');
-      this.firefly5 = this.add.sprite(360, 150, 'firefly');
-
+    
     
       // cameras 
       this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
