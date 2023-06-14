@@ -16,8 +16,10 @@ class Menu extends Phaser.Scene {
         this.bgImage = this.add.tileSprite(0,0, 630, 450, 'bgImage').setOrigin(0,0);
         // show menu text
         this.add.bitmapText(game.config.width/2, game.config.height/2.5, 'Font', 'Grave of the FireFlies', 50).setOrigin(0.5);
-        this.add.bitmapText(game.config.width/2, game.config.height/2, 'Font', 'Type (S) to Scene1, (R) for Scene2', 32).setOrigin(0.5);
-        this.add.bitmapText(game.config.width/2, game.config.height/1.75, 'Font', '(C) for Scene3', 32).setOrigin(0.5);
+        this.add.bitmapText(game.config.width/2, game.config.height/2, 'Font', 'Type (1) to Scene1, (2) for Scene2', 32).setOrigin(0.5);
+        this.add.bitmapText(game.config.width/2, game.config.height/1.75, 'Font', '(3) for Scene3', 32).setOrigin(0.5);
+        this.add.bitmapText(game.config.width/2, game.config.height/1.50, 'Font', '(R) for Rules', 32).setOrigin(0.5);
+        this.add.bitmapText(game.config.width/2, game.config.height/1.25, 'Font', '(C) for Credits', 32).setOrigin(0.5);
 
        
         // define keys
@@ -25,21 +27,29 @@ class Menu extends Phaser.Scene {
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
-        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+        key3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
+        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
+        keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C)
     }
   
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyS)) {
+        if (Phaser.Input.Keyboard.JustDown(key1)) {
             this.scene.start("scene1");
         }
-        else if (Phaser.Input.Keyboard.JustDown(keyR)) {
+        else if (Phaser.Input.Keyboard.JustDown(key2)) {
             this.scene.start("scene2")
         }
 
-        else if (Phaser.Input.Keyboard.JustDown(keyC)) {
+        else if (Phaser.Input.Keyboard.JustDown(key3)) {
             this.scene.start("scene3"); 
         }
+        else if (Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.scene.start("rulesScene"); 
+        }
+        else if (Phaser.Input.Keyboard.JustDown(keyC)) {
+            this.scene.start("creditsScene"); 
+        } 
     }
   }

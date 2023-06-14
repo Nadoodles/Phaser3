@@ -18,7 +18,7 @@ let config = {
       }
   },
   zoom: 2, 
-  scene: [Menu, Scene1, Scene2, Scene3, GameOver]
+  scene: [Menu, Scene1, Scene2, Scene3, GameOver, Rules, Credits]
 }
 
 let game = new Phaser.Game(config);
@@ -28,4 +28,4 @@ let borderUISize = game.config.height / 3;
 let borderPadding = borderUISize / 3; 
 
 // Reserve keyboard vars
-let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyR, keyS, keyC;
+let keyUP, keyDOWN, keyLEFT, keyRIGHT, keyR, keyS, keyC, key1, key2, key3;
