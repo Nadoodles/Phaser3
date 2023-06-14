@@ -1,5 +1,5 @@
 // Movie: Grave of the Fireflies
-// Partner; Brian Camillo
+// By Jose Nadales and Brian Camilo
 
 let config = {
   type: Phaser.AUTO,
