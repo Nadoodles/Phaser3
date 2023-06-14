@@ -16,7 +16,7 @@ class Rules extends Phaser.Scene {
         // add credits text
         this.add.bitmapText(300, 50, 'Font', 'Rules:', 12).setOrigin(0.5);
         this.add.bitmapText(300, 75, 'Font', 'Scene 1:', 12).setOrigin(0.5)
-        this.add.bitmapText(300, 100, 'Font', 'Your goal is mto dodge the fires and reach the exit sign.', 12).setOrigin(0.5);
+        this.add.bitmapText(300, 100, 'Font', 'Your goal is to dodge the fires and reach the exit sign.', 12).setOrigin(0.5);
         this.add.bitmapText(300, 125, 'Font', 'You must find the exit sign and escape to safety. ', 12).setOrigin(0.5);
 
         this.add.bitmapText(300, 150, 'Font', 'Scene 2: ', 12).setOrigin(0.5)
