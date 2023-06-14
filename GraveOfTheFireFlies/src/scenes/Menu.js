@@ -12,14 +12,14 @@ class Menu extends Phaser.Scene {
   
     create() {
 
-        // add bgm
+        // add bgImage
         this.bgImage = this.add.tileSprite(0,0, 630, 450, 'bgImage').setOrigin(0,0);
         // show menu text
         this.add.bitmapText(game.config.width/2, game.config.height/2.5, 'Font', 'Grave of the FireFlies', 50).setOrigin(0.5);
         this.add.bitmapText(game.config.width/2, game.config.height/2, 'Font', 'Type (1) to Scene1, (2) for Scene2', 32).setOrigin(0.5);
         this.add.bitmapText(game.config.width/2, game.config.height/1.75, 'Font', '(3) for Scene3', 32).setOrigin(0.5);
-        this.add.bitmapText(game.config.width/2, game.config.height/1.50, 'Font', '(R) for Rules', 32).setOrigin(0.5);
-        this.add.bitmapText(game.config.width/2, game.config.height/1.25, 'Font', '(C) for Credits', 32).setOrigin(0.5);
+        this.add.bitmapText(game.config.width/2, game.config.height/1.55, 'Font', '(R) for Rules (C) for Credits', 16).setOrigin(0.5);
+       // this.add.bitmapText(game.config.width/2, game.config.height/1.25, 'Font', '(C) for Credits', 16).setOrigin(0.5);
 
        
         // define keys

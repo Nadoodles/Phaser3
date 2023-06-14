@@ -66,7 +66,7 @@ class Scene2 extends Phaser.Scene {
         treeLayer.setCollisionBetween(33, 36)
         treeLayer.setCollisionBetween(66, 69)
 
-        this.points, this.points1, this.points2, this.points3 = 0;
+        this.points, this.points1, this.points2, this.points3, this.points4 = 0;
 
         // added sfx
         this.pickupSound = this.sound.add('pickup', {volume: 0.3});
@@ -97,8 +97,6 @@ class Scene2 extends Phaser.Scene {
 
     update() {
         this.direction = new Phaser.Math.Vector2(0);
-
-      
 
         if (this.cursors.left.isDown) {
             this.direction.x = -1;
