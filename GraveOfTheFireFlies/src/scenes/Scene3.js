@@ -62,8 +62,6 @@ class Scene3 extends Phaser.Scene {
       this.firefly4 = this.add.sprite(395, 430, 'firefly');
       this.firefly5 = this.add.sprite(360, 150, 'firefly');
 
-      const fog = this.add.image(0, 0, 'fog').setOrigin(0).setDepth(Number.MAX_SAFE_INTEGER);
-
     
       // cameras 
       this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
