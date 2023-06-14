@@ -37,7 +37,7 @@ class Scene1 extends Phaser.Scene {
         this.physics.add.existing(this.fireSprite); // Enable physics for collision detection
     
         // Set a timer to spawn the next fire
-        const spawnInterval = Phaser.Math.Between(2000, 5000); // Randomize the interval
+        const spawnInterval = Phaser.Math.Between(500, 1000); // Randomize the interval
         this.fireSpawnTimer = this.time.delayedCall(spawnInterval, () => {
           this.fireSpawned = false; // Reset the fireSpawned flag
           this.spawnFire(); // Call the spawnFire function again
